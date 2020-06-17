@@ -21,7 +21,7 @@ node('master') {
     def project = 'linhbkhn95'
     def appName = 'kube-example'
     // def privateRegistry = 'hub.docker.com'
-    def privateRegistry = 'localhost:5000'
+    def privateRegistry = 'example.com'
 
     def workspace = pwd()
     def BRANCH_NAME = getGitBranchName();
@@ -109,7 +109,9 @@ node('master') {
       withEnv(["PATH=$PATH:~/.local/bin"]){
         // sh 'docker-compose down'
         docker.withRegistry("http://${privateRegistry}", 'exampleregistry') {
-          sh "docker pull ${privateRegistry}/${imageTag}"
+          //sh "docker pull ${privateRegistry}/${imageTag}"
+          sh "docker pull ${imageTag}"
+
           // sh 'docker-compose up -d'
           sh "docker run -d --network=host  --restart=always ${imageTag}"
           notifySlack('SUC CMN CESS');
