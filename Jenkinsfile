@@ -113,7 +113,7 @@ node('master') {
           //sh "docker pull ${imageTag}"
 
           // sh 'docker-compose up -d'
-          sh "docker run -d --network=host  --restart=always ${imageTag}"
+          sh "docker run -d --network=host  --restart=always ${privateRegistry}/${imageTag}"
           notifySlack('SUC CMN CESS');
         }
       }
