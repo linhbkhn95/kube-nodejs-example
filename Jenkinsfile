@@ -109,8 +109,8 @@ node('master') {
       withEnv(["PATH=$PATH:~/.local/bin"]){
         // sh 'docker-compose down'
         docker.withRegistry("http://${privateRegistry}", 'exampleregistry') {
-          //sh "docker pull ${privateRegistry}/${imageTag}"
-          sh "docker pull ${imageTag}"
+          sh "docker pull ${privateRegistry}/${imageTag}"
+          //sh "docker pull ${imageTag}"
 
           // sh 'docker-compose up -d'
           sh "docker run -d --network=host  --restart=always ${imageTag}"
